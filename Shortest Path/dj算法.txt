@@ -1,0 +1,12 @@
+found数组用于判断是否操作过,0表示未，1表示已
+path数组记录下标顶点目前最短前驱
+distance数组记录下标顶点与起点的目前最优距离
+choose函数用于从distance[ ]中寻找距离最近且未被观察过的(顶点的下标)
+具体步骤：
+1.读取邻接矩阵arc， found[ ](起点为1剩下0)，distance[ ](起点为0，其余为邻接矩阵中与起点的距离，无连线则为无穷大)，path[ ](初始值全为-1)
+2.使用choose函数找到接下来要操作的顶点(下标)next,令found[next]=1
+3.遍历整个found[ ]的顶点j，如果发现有未操作且存在与vertex[next]连线的顶点就进入4
+4.判断当前操作的顶点(next)到起点（即distance[next]）与顶点next到顶点j的距离之和是否小于distance[j]中记录的值（distance[next] + arc[next][j]  <  distance[j]）
+a:如果小于就将该距离写入distance[j]，并将该顶点写入path[j](相当于顶点j的前驱)
+b:如果大于或所有顶点j遍历完成就返回2寻找新的next值
+5.重复2->4共 顶点数-1次，输出
